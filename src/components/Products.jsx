@@ -36,6 +36,8 @@ const Products = memo(() => {
         setsearch(e.target.value)
     }
 
+    
+
     const filterProducts = products.filter((e) => {
         const matchesCategory = querycategory
             ? e.productCategory === querycategory
@@ -69,9 +71,9 @@ const Products = memo(() => {
                         <option value="pricehigh">price : high-low</option>
                     </select>
                 </div>
-                <div className='flex justify-center items-center rounded-full border pl-1 pr-4 p-1'>
-                    <button className='p-2 bg-slate-900 rounded-full'>
-                        <img src={searchimg} className='w-6 h-6 cursor-pointer invert rounded-full' />
+                <div className='flex justify-center items-center rounded-[12px] border border-gray-400 pl-1 pr-4 p-1'>
+                    <button className='p-2 rounded-md'>
+                        <img src={searchimg} className='w-6 h-6 cursor-pointer rounded-md' />
                     </button>
                     <input onChange={handleSearchChange} placeholder='Search Product' className='text-sm p-2 w-80 focus:outline-0 ml-2' type="text" />
                 </div>

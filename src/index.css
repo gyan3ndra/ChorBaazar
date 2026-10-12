@@ -16,10 +16,10 @@ h5 {
   width: fit-content;
   padding: 14px 45px 14px 30px;
   font-weight: 300;
-  color: #f1f5f9;
-  background-color: #111827;
-  border: 1px solid #374151;
-  border-radius: 50px;
+  color: #181a1c;
+  background-color: #fefeff;
+  border: 1px solid #a8aaac;
+  border-radius: 10px;
   outline: none;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -31,18 +31,18 @@ h5 {
 }
 
 .modern-select:hover {
-  border-color: #6366f1;
-  background-color: #1f2937;
+  border-color: #787878;
+  background-color: #f4f2f2;
 }
 
-.modern-select:focus {
-  border-color: #818cf8;
+/* .modern-select:focus {
+  border-color: #020203;
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
-}
+} */
 
 .modern-select option {
-  background-color: #111827;
-  color: #f1f5f9;
+  background-color: #fbfbfd;
+  color: #1b1d1f;
   padding: 12px;
 }
 
