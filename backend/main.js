@@ -3,9 +3,8 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import admin from './routes/admin.js'
 import products from './routes/products.js'
-import cart from './routes/cart.js'
-import user from './routes/user.js'
 dotenv.config()
 
 
@@ -20,9 +19,8 @@ app.use(cors({
 }))
 app.use(cookieParser())
 app.use(express.json())
-app.use('/user', user)
-app.use('/products', products)
-app.use('/cart', cart)
+app.use('/admin',admin)
+app.use('/products',products)
 
 try {
     await mongoose.connect(process.env.MONGO_URL)

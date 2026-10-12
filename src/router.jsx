@@ -4,11 +4,10 @@ import App from "./App";
 import About from "./components/About"
 import Products from "./components/Products";
 import Overview from "./components/Overview";
-import Cart from "./components/Cart";
 import Contact from "./components/Contact";
 import Login from './components/Login'
 import Signup from './components/Signup'
-import Post from './components/Post'
+import Admin from './components/Admin'
 import Navbar from './components/Navbar'
 
 const router = createBrowserRouter([
@@ -33,18 +32,10 @@ const router = createBrowserRouter([
                 element: <Overview />
             },
             {
-                path: 'user/cart',
-                element: <Cart />
-            },
-            {
-                path: 'post',
-                element: <Post />
+                path: '/products',
+                element: <Products />
             },
         ],
-    },
-    {
-        path: '/products',
-        element: <> <Navbar/> <Products /> </>
     },
     {
         path: '/login',
@@ -53,6 +44,10 @@ const router = createBrowserRouter([
     {
         path: '/signup',
         element: <Signup />
+    },
+    {
+        path: '/admin',
+        element: <Admin />
     },
 ])
 

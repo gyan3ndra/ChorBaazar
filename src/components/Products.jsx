@@ -1,138 +1,104 @@
-import { useState, useEffect } from "react"
+import React, { memo, useState } from 'react'
+import searchimg from '../assets/search.png'
+import { useSearchParams } from 'react-router-dom'
 
-const Products = () => {
+const Products = memo(() => {
+    const [params] = useSearchParams()
+    const querycategory = params.get('category')
+    console.log(querycategory)
     const [products, setproducts] = useState([])
     const [category, setcategory] = useState('')
-    const [attribute, setattribute] = useState({})
-    const limit = 3
-    const [viewmore, setviewmore] = useState(0)
-    const [hasmore,sethasmore] = useState(true)
-    const [subcategory, setsubcategory] = useState("")
-
-    const fetchproducts = async () => {
-        let url
-        if(Object.keys(attribute).length>0){
-            url = `${import.meta.env.VITE_BACKEND}/products/filter?category=${category}&subcategory=${subcategory}&limit=${limit}&skip=${viewmore}`
-            Object.entries(attribute).forEach(([key,value])=>{
-                url+=`&${key}=${value}`
-            })
-        }else if (subcategory) {
-            url = `${import.meta.env.VITE_BACKEND}/products/filter?category=${category}&subcategory=${subcategory}&limit=${limit}&skip=${viewmore}`
-        } else {
-            url = category === "" ? `${import.meta.env.VITE_BACKEND}/products?limit=${limit}&skip=${viewmore}` : `${import.meta.env.VITE_BACKEND}/products?category=${category}&limit=${limit}&skip=${viewmore}`
+    const [search, setsearch] = useState('')
+    const [sort, setsort] = useState('')
+    const categories = ['Electronics', 'Fashion', 'Footwear','PcComponents']
+    useState(() => {
+        const fetchproducts = async () => {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products`)
+                const data = await res.json()
+                if (res.ok) {
+                    setproducts(data)
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
-        const res = await fetch(url)
-        const data = await res.json()
-        sethasmore(data.hasmore)
-        console.log(data)
-        if (viewmore === 0) {
-            setproducts(data.products)
-        } else {
-            setproducts(prev => [...prev, ...data.products])
-        }
-    }
-
-    useEffect(() => {
         fetchproducts()
-    }, [category, subcategory, attribute, viewmore])
+    }, [])
 
-    const handlechange = (e) => {
+    const handleCategoryChange = (e) => {
         setcategory(e.target.value)
-        setsubcategory('')
-        setproducts([])
-        setviewmore(0)
     }
-    const handleattribute = (e) => {
-        const { id, name, checked } = e.target
-        if (checked) {
-            setattribute(prev => ({ ...prev, [name]: id }))
-        }
-        setproducts([])
-        setviewmore(0)
+    const handleSortChange = (e) => {
+        setsort(e.target.value)
     }
-    const handlesubcategory = (e) => {
-        setsubcategory(e.target.id)
-        setviewmore(0)
-        setproducts([])
-    }
-    const handleclear = () => {
-        setsubcategory('')
-        setattribute([])
-        setproducts([])
-        setviewmore(0)
+    const handleSearchChange = (e) => {
+        setsearch(e.target.value)
     }
 
+    const filterProducts = products.filter((e) => {
+        const matchesCategory = querycategory
+            ? e.productCategory === querycategory
+            : category === 'All' || !category
+                ? true
+                : e.productCategory === category
+
+        const matchesSearch = e.productInfo.toLowerCase().includes(search.toLowerCase()) || e.productCategory.toLowerCase().includes(search.toLowerCase())
+
+        return matchesCategory && matchesSearch
+    })
     return (
-        <section className="h-[90vh] grid md:grid-cols-[20%_80%]">
-            <section className="bg-slate-950 p-3 sticky h-full top-0">
-                <div className="flex gap-5">
-                    <select value={category} onChange={handlechange} className="bg-white p-3 pr-5 pl-5 focus:outline-0 border font-light cursor-pointer *:font-light rounded-md">
-                        <option value="">All Categories</option>
-                        <option value="clothes">Clothes</option>
-                        <option value="shoes">Shoes</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="accessories">Accessories</option>
-                        <option value="laptops">Laptops</option>
-                        <option value="mobiles">Mobiles</option>
+        <section className='pt-18 h-screen'>
+            <section className='flex flex-wrap gap-3 justify-center md:justify-start p-5'>
+                <div className='flex gap-2'>
+                    <select onChange={handleCategoryChange} className='modern-select text-sm md:text-md' name="category" id="">
+                        <option value=''>Category</option>
+                        {
+                            categories.map((e) => {
+                                return (
+                                    <option key={e} value={e}>{e}</option>
+                                )
+                            })
+                        }
+                    </select>
+                    <select onChange={handleSortChange} name="sort" className='modern-select text-sm md:text-md' id="">
+                        <option value="">Sort Items</option>
+                        <option value="">none</option>
+                        <option value="latest">latest</option>
+                        <option value="pricelow">price : low-high</option>
+                        <option value="pricehigh">price : high-low</option>
                     </select>
                 </div>
-                {category === "clothes" && (<div className="transition-all duration-500 mt-3 p-4 border w-full border-white rounded-md">
-                    <div className="bg-blue-500">
-                        <h5 className="text-white mb-2">subcategory</h5>
-                        <div className="flex gap-2">
-                            <input checked={subcategory === "shirt"} name="subcategory" onChange={handlesubcategory} id="shirt" className="focus:outline-0" type="radio" />
-                            <label className="text-white font-light" htmlFor="shirt">Shirt</label>
-                        </div>
-                        <div className="flex gap-2">
-                            <input checked={subcategory === "pant"} name='subcategory' onChange={handlesubcategory} id="pant" className="focus:outline-0" type="radio" />
-                            <label className="text-white font-light" htmlFor="pant">Pant</label>
-                        </div>
-                        <div className="flex gap-2">
-                            <input checked={subcategory === "shoes"} name='subcategory' onChange={handlesubcategory} id="shoes" className="focus:outline-0" type="radio" />
-                            <label className="text-white font-light" htmlFor="shoes">Shoes</label>
-                        </div>
-                    </div>
-                    <div className="bg-red-700 mt-5">
-                        <h5 className="text-white mb-2">attributes</h5>
-                        <div className="flex gap-2">
-                            <input checked={attribute.gender === "men"} name='gender' onChange={handleattribute} id="men" className="focus:outline-0" type="radio" />
-                            <label className="text-white font-light" htmlFor="men">Men</label>
-                        </div>
-                        <div className="flex gap-2">
-                            <input checked={attribute.gender === "women"} name='gender' onChange={handleattribute} id="women" className="focus:outline-0" type="radio" />
-                            <label className="text-white font-light" htmlFor="women">Women</label>
-                        </div>
-                        <div className="flex gap-2">
-                            <input checked={attribute.gender === "kid"} name='gender' onChange={handleattribute} id="kid" className="focus:outline-0" type="radio" />
-                            <label className="text-white font-light" htmlFor="kid">Kid</label>
-                        </div>
-                    </div>
-                    <button onClick={handleclear} className="w-full bg-white p-3 mt-10">clear</button>
-                </div>)}
+                <div className='flex justify-center items-center rounded-full border pl-1 pr-4 p-1'>
+                    <button className='p-2 bg-slate-900 rounded-full'>
+                        <img src={searchimg} className='w-6 h-6 cursor-pointer invert rounded-full' />
+                    </button>
+                    <input onChange={handleSearchChange} placeholder='Search Product' className='text-sm p-2 w-80 focus:outline-0 ml-2' type="text" />
+                </div>
             </section>
-            <section className="overflow-y-auto">
-                <h5 className="text-center text-3xl p-3">{category}</h5>
-                <div className="flex gap-10 flex-wrap p-5 justify-center">
-                    {products.map((e) => {
-                        return (
-                            <div key={e.productId} className="w-50 h-65 bg-white relative group overflow-hidden">
-                                <img className="w-full h-full object-cover group-hover:blur-xs bg-black group-hover:scale-110 transition-all duration-500" src={e.image} alt="" />
-                                <div className="absolute left-2 top-2">
-                                    <h1 className="text-md font-extrabold text-white shadow-md p-2 rounded-md">{e.subcategory}{e.attributes.gender}$</h1>
+            <section className='p-2'>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 p-2 place-items-center">
+                    {
+                        filterProducts.map((e) => {
+                            return (
+                                <div key={e.productId} className="w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-3 flex flex-col">
+                                    <div className="w-full h-2/3"><img src={e.productImage} className="w-full h-full object-contain" /></div>
+                                    <div className="p-2">
+                                        <h4 className="text-black text-sm line-clamp-2">{e.productInfo}</h4>
+                                    </div>
+                                    <div className='mt-auto flex justify-between'>
+                                        <a href={`/overview?productId=${e.productId}`} className="p-2 pl-5 pr-5 bg-slate-900 text-white text-xs rounded-full w-fit">overview</a>
+                                        <h1 className='text-lg font-bold text-slate-800'>₹{e.productPrice}</h1>
+                                    </div>
                                 </div>
-                                <a href={`/overview?productId=${e._id}`} className="bg-gray-900/10 font-semibold backdrop-blur-2xl cursor-pointer opacity-0 text-white p-3 text-sm left-1/2 top-1/2 absolute -translate-x-1/2 -translate-y-1/2 pl-5 pr-5 group-hover:opacity-100 transition-all duration-700">VIEW</a>
-                            </div>
-                        )
-                    })}
-
+                            )
+                        })
+                    }
 
                 </div>
-                {hasmore && <div className="flex justify-center mb-5">
-                    <button onClick={() => { setviewmore(viewmore + limit) }} className="p-3 pl-5 pr-5 border hover:scale-101 cursor-pointer hover:bg-slate-900 transition-all duration-300 hover:text-white">View More</button>
-                </div>}
             </section>
         </section>
     )
-}
+})
 
 export default Products

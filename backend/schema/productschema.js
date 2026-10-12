@@ -1,62 +1,41 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 import crypto from 'crypto'
-
-
+import { type } from 'os'
 
 const schema = mongoose.Schema({
-    productId:{
-        type:String,
-        default:()=>{return crypto.randomBytes(8).toString('hex')}
+    productId: {
+        type: String,
+        default: () => crypto.randomBytes(6).toString('hex')
     },
-    name:{
-        type:String,
-        trim:true,
+    productImage: {
+        type: String,
+        trim: true,
     },
-    price:{
+    productInfo: {
+        type: String,
+        trim: true,
+    },
+    productCategory: {
+        type: String,
+        trim: true,
+    },
+    productSubCategory: {
+        type: String,
+        trim: true,
+    },
+    productPrice:{
         type:Number,
         default:0
     },
-    about:{
-        type:String,
-        trim:true
-    },
-    category:{
-        type:String,
-        trim:true
-    },
-    subcategory:{
-        type:String,
-        trim:true
-    },
-    image:{
-        type:String,
-        trim:true,
-        default: 'https://www.beyours.in/cdn/shop/files/white-for-bundle_1.jpg?v=1767949967&width=1200'
-    },
-    location:{
-        type:String,
-        trim:true,
-        default:'kanpur'
-    },
-    seller:{
-        type:String,
-        default:'kronos'
-    },
-    attributes: {
-        type: mongoose.Schema.Types.Mixed,
-        default: {}
-    },
-    purchaseCount:{
+    productAddedCount:{
         type:Number,
-        default: 0
+        default:0
     },
-    createdAt:{
-        type:Date,
-        default:Date.now
+    uploadedAt: {
+        type: Date,
+        default: Date.now
     }
-
 })
 
-const db = mongoose.model('product',schema)
-
+const db = mongoose.model('product', schema)
 export default db
