@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import Homeproducts from './Homeproducts'
 import fashionimg from '../assets/productcategory/fashion.jpg'
 import electronicsimg from '../assets/productcategory/electronics.jpg'
 import footwearimg from '../assets/productcategory/footwear.jpg'
