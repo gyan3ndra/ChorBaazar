@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 const Products = memo(() => {
     const [params] = useSearchParams()
     const querycategory = params.get('category')
-    console.log(querycategory)
+    // console.log(querycategory)
     const [products, setproducts] = useState([])
     const [category, setcategory] = useState('')
     const [search, setsearch] = useState('')
@@ -36,8 +36,6 @@ const Products = memo(() => {
         setsearch(e.target.value)
     }
 
-    
-
     const filterProducts = products.filter((e) => {
         const matchesCategory = querycategory
             ? e.productCategory === querycategory
@@ -49,12 +47,24 @@ const Products = memo(() => {
 
         return matchesCategory && matchesSearch
     })
+
+    const sortProducts = [...filterProducts].sort((a,b)=>{
+        if (sort==='pricelow') {
+            return a.productPrice - b.productPrice
+        }
+        if (sort==='pricehigh') {
+            return b.productPrice - a.productPrice
+        }
+        return 0
+    })
+    console.log(sort)
     return (
         <section className='pt-18 h-screen'>
             <section className='flex flex-wrap gap-3 justify-center md:justify-start p-5'>
                 <div className='flex gap-2'>
                     <select onChange={handleCategoryChange} className='modern-select text-sm md:text-md' name="category" id="">
                         <option value=''>Category</option>
+                        <option value=''>All</option>
                         {
                             categories.map((e) => {
                                 return (
@@ -81,7 +91,7 @@ const Products = memo(() => {
             <section className='p-2'>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 p-2 place-items-center">
                     {
-                        filterProducts.map((e) => {
+                        sortProducts.map((e) => {
                             return (
                                 <div key={e.productId} className="w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-3 flex flex-col">
                                     <div className="w-full h-2/3"><img src={e.productImage} className="w-full h-full object-contain" /></div>
