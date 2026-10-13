@@ -79,18 +79,18 @@ const Products = memo(() => {
                 </div>
             </section>
             <section className='p-2'>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 p-2 place-items-center">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 p-2 place-items-center">
                     {
                         filterProducts.map((e) => {
                             return (
-                                <div key={e.productId} className="w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-3 flex flex-col">
+                                <div key={e.productId} className="w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-3 flex flex-col">
                                     <div className="w-full h-2/3"><img src={e.productImage} className="w-full h-full object-contain" /></div>
                                     <div className="p-2">
                                         <h4 className="text-black text-sm line-clamp-2">{e.productInfo}</h4>
                                     </div>
-                                    <div className='mt-auto flex justify-between'>
-                                        <a href={`/overview?productId=${e.productId}`} className="p-2 pl-5 pr-5 bg-slate-900 text-white text-xs rounded-full w-fit">overview</a>
-                                        <h1 className='text-lg font-bold text-slate-800'>₹{e.productPrice}</h1>
+                                    <div className='mt-auto flex justify-between items-center'>
+                                        <h1 className='text-xs md:text-lg font-bold text-slate-800'>₹{e.productPrice}</h1>
+                                        <a href={`/overview?productId=${e.productId}`} className="p-2 pl-3 pr-3 md:pl-5 md:pr-5 bg-slate-900 text-white text-xs rounded-full w-fit">overview</a>
                                     </div>
                                 </div>
                             )

@@ -4,6 +4,7 @@ import fashionimg from '../assets/productcategory/fashion.jpg'
 import electronicsimg from '../assets/productcategory/electronics.jpg'
 import footwearimg from '../assets/productcategory/footwear.jpg'
 import componentsimg from '../assets/productcategory/components.jpg'
+import collectionimg from '../assets/collection.png'
 import Footer from './Footer'
 import logo from '../assets/logo.png'
 import { useNavigate } from "react-router-dom";
@@ -92,115 +93,108 @@ const Home = () => {
             <section className="min-h-[80vh] grid grid-cols-1 lg:grid-cols-2 place-items-center">
                 <section className="p-4">
                     <div className="p-4 rounded-2xl w-full h-full">
-                        <h1 className="text-5xl md:text-8xl font-extrabold ">CHOR</h1>
-                        <h1 className="text-5xl md:text-8xl font-extrabold text-slate-600 ">BAAZAR !</h1>
-                        <h5 className="text-gray-600 font-bold mt-5 text-lg">Deals So Good, They Feel Illegal!</h5>
+                        <h1 className="text-6xl md:text-8xl font-extrabold ">CHOR</h1>
+                        <h1 className="text-6xl md:text-8xl font-extrabold text-slate-700 ">BAAZAR.</h1>
+                        <h5 className="text-gray-600 font-bold mt-1 text-lg">Deals So Good, They Feel Illegal!</h5>
+                        <p className="text-slate-600 text-sm sm:text-md lg:w-5/6 mt-5 mb-7">From everyday essentials to your next favourite gadget, discover great products at prices worth coming back for.</p>
                         {/* <p className="text-md font-light text-gray-300 mt-3 mb-5 w-5/6">Welcome to Chor Baazar — your one-stop destination for shopping across multiple categories!</p> */}
-                        <div className="flex gap-5 mt-5">
-                            <button onClick={() => navigate('/about')} className="p-3 cursor-pointer pl-10 pr-10 text-md md:text-lg bg-text-950 border-1 transition-all duration-300">About Us</button>
-                            <button onClick={() => document.getElementById('EXPLORE').scrollIntoView({ behavior: 'smooth' })} className="p-3 bg-slate-800 cursor-pointer pl-10 pr-10 text-md md:text-lg text-white hover:bg-slate-950 border-slate-800 transition-all duration-300">Explore</button>
+                        <div className="w-5/6 h-px bg-slate-100 rounded-2xl mx-auto"></div>
+                        <div className="flex gap-5 flex-wrap mt-5">
+                            <button onClick={() => document.getElementById('EXPLORE').scrollIntoView({ behavior: 'smooth' })} className="p-3 bg-slate-950 cursor-pointer pl-10 pr-10 text-md md:text-lg text-white hover:bg-slate-950 border-slate-800 transition-all duration-300 rounded-md flex items-center justify-center gap-3"><img className="w-5 h-5 invert" src={collectionimg} />Explore collections</button>
+                            <button onClick={() => navigate('/about')} className="p-3 cursor-pointer pl-10 pr-10 text-md md:text-lg bg-text-950 border-1 transition-all duration-300 rounded-md">About Us</button>
                         </div>
                     </div>
                 </section>
                 <section className="p-4">
                     <div className="grid gap-2 grid-cols-2">
                         <div className="grid grid-cols-1 gap-2 *:transition-all *:duration-300 *:hover:scale-102 cursor-pointer">
-                            <div className="w-40 h-43 md:w-47 md:h-46 bg-gray-400 rounded-3xl"></div>
-                            <div className="w-40 h-30 md:w-47 md:h-36 bg-gray-600 rounded-3xl"></div>
+                            <div className="overflow-hidden w-40 h-43 md:w-50 md:h-46 bg-gray-300 rounded-3xl p-3 flex flex-col">
+                                <h2 className="text-lg md:text-2xl font-extrabold text-slate-600">OUR INVENTORY</h2>
+                                <div className="">
+                                    <h1 className="text-center text-2xl text-slate-800 font-extrabold">1,200+</h1>
+                                    <p className="text-xs text-center text-slate-700 font-semibold">Total Products</p>
+                                </div>
+                                <p className="text-sm md:text-lg text-slate-800 font-extrabold mt-auto">More to discover.</p>
+                            </div>
+                            <div className="overflow-hidden w-40 h-30 md:w-50 md:h-36 bg-gray-900 rounded-3xl p-3 flex flex-col items-center gap-1">
+                                <h2 className="text-lg md:text-2xl font-extrabold text-slate-500">FOR EVERYONE</h2>
+                                <div className="">
+                                    <h1 className="text-center text-2xl text-slate-400 font-extrabold">4+</h1>
+                                    <p className="text-xs text-center text-slate-300 font-semibold">Product Categories</p>
+                                </div>
+                            </div>
                         </div>
                         <div className="grid grid-cols-1 gap-2 *:transition-all *:duration-300 *:hover:scale-102 cursor-pointer">
-                            <div className="w-40 h-30 md:w-47 md:h-36 bg-gray-600 rounded-3xl"></div>
-                            <div className="w-40 h-43 md:w-47 md:h-46 bg-gray-400 rounded-3xl"></div>
+                            <div className="overflow-hidden w-40 h-30 md:w-50 md:h-36 bg-gray-900 rounded-3xl p-3 flex flex-col">
+                                <h2 className="text-2xl md:text-3xl text-slate-300 font-extrabold">HOT PICKS</h2>
+                                <h2 className="text-2xl md:text-3xl text-slate-500 font-extrabold">Deals.</h2>
+                                <p className="text-xs text-slate-300 font-semibold mt-auto">Find your next bargain.</p>
+                            </div>
+                            <div className="overflow-hidden w-40 h-43 md:w-50 md:h-46 bg-gray-300 rounded-3xl p-3 flex flex-col">
+                                <h2 className="text-3xl md:text-4xl text-slate-800 font-extrabold">BEST</h2>
+                                <h2 className="text-3xl md:text-4xl text-slate-500 font-extrabold">SELLERS.</h2>
+                                <button onClick={()=>document.getElementById('BEST-SELLER').scrollIntoView({behavior:'smooth'})} className="border-2 mt-auto ml-auto p-1  rounded-full text-slate-800 text-sm pl-3 pr-3 cursor-pointer hover:bg-slate-100 transition-all duration-200">view ↗</button>
+                            </div>
                         </div>
                     </div>
                 </section>
             </section>
-            <section className="px-4 py-14 md:py-20">
-                {/* <h4 className="text-sm font-bold text-slate-600 text-center">DIFFERENCE</h4> */}
-                <div className="mt-10 mb-10">
-                    <h1 className="font-semibold text-3xl text-center mb-2">Why Shop With Us?</h1>
-                    <p className=" text-center text-sm text-slate-400">A better shopping experience, built around what matters to you.</p>
-                </div>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 place-items-center">
-                    {
-                        cards.map((e, i) => {
-                            return (
-                                <div key={i} className="p-4 sm:p-6 md:p-7 hover:scale-102 transition-all duration-300">
-                                    <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl border border-gray-200 dark:border-white/10 flex items-center justify-center mb-5 text-gray-700 dark:text-gray-300 group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{e.icon}</svg>
-                                    </div>
-                                    <h2 className="text-md md:text-lg font-semibold text-slate-800 tracking-tight">{e.title}</h2>
-                                    <p className="text-sm text-slate-400 leading-relaxed">{e.desc}</p>
-                                </div>
-                            )
-                        })
-                    }
+            <section>
+                <div>
+
                 </div>
             </section>
-            {/* ```jsx
-<section className="px-4 py-14 md:py-20">
-    <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10 md:mb-14">
-            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-gray-500 mb-3">The Difference</p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">Why Shop With Us?</h2>
-            <p className="text-sm text-gray-500 mt-3 max-w-md mx-auto">A better shopping experience, built around what matters to you.</p>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-            {.map((item,i)=>(
-                <div key={i} className="group border border-gray-200 dark:border-white/10 rounded-2xl p-4 sm:p-6 md:p-7 transition-all duration-300 hover:border-gray-400 dark:hover:border-white/25 hover:-translate-y-1">
-                    <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl border border-gray-200 dark:border-white/10 flex items-center justify-center mb-5 text-gray-700 dark:text-gray-300 group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-all duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{item.icon}</svg>
-                    </div>
-                    <h3 className="text-base md:text-lg font-semibold tracking-tight">{item.title}</h3>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">{item.desc}</p>
-                </div>
-            ))}
-        </div>
-    </div>
-</section>
-``` */}
 
-            <section className="p-2 md:p-4 mt-10" id="EXPLORE">
+
+            <div className="h-px bg-slate-100 w-full"></div>
+            <section className="p-2 md:p-4 mt-10 mb-10" id="EXPLORE">
                 <div className="mb-10">
-                    <h1 className="text-center text-3xl mb-3 font-semibold">Shop By Categories</h1>
+                    <h4 className="text-xs font-semibold text-slate-700 bg-slate-200 p-1 rounded-full w-fit pl-2 pr-2">Find Your Next Favourite</h4>
+                    <h1 className="text-4xl mb-2 mt-2 font-extrabold">Shop By Categories</h1>
+                    <p className="text-sm font-semibold text-slate-600 pl-1 mb-3">A little something for every kind of shopper.</p>
                     {/* <div className="h-1 bg-slate-700 w-20 rounded-full mx-auto"></div> */}
                 </div>
-                <div className="h-150 lg:h-110 grid grid-cols-2 rounded-2xl *:w-[160px] *:h-65 *:md:w-[220px] *:md:h-90 md:grid-cols-4 w-fit p-3 gap-5 lg:gap-10 mx-auto">
+                <div className="h-fit grid grid-cols-2 rounded-2xl *:w-full *:h-65 *:md:max-w-[250px] *:md:h-85 md:grid-cols-4 w-fit p-3 gap-5 lg:gap-10 mx-auto">
                     {
                         categorycards.map((e) => {
                             return (
-                                <a href={e.to} key={e.title} className={`${e.bg} relative shadow-lg group transition-all overflow-hidden rounded-2xl duration-300 hover:scale-101 ${e.prop} cursor-pointer`}>
+                                <a href={e.to} key={e.title} className={`${e.bg} relative shadow-lg group inset-sha transition-all overflow-hidden rounded-2xl duration-300 hover:scale-101 ${e.prop} cursor-pointer`}>
                                     {/* <h1 className="absolute top-5 w-full left-1/2 -translate-x-1/2 -translate-y-1/2 text-md font-bold text-center">{e.title}</h1> */}
                                     <img src={e.img} className="w-full h-full object-cover rounded-2xl group-hover:scale-120 transition-all duration-300" alt="" />
+                                    <div className="absolute bottom-5 left-3">
+                                        <h1 className=" text-white text-lg font-extrabold">{e.title}</h1>
+                                    </div>
                                 </a>
                             )
                         })
                     }
                 </div>
             </section>
-            <section className="h-fit p-4 mt-15">
-                <h1 className="text-3xl">Our Best Sellers</h1>
+            <div className="h-px bg-slate-100 w-full"></div>
+            <section id="BEST-SELLER" className="h-fit p-4 mt-10">
+                <h1 className="text-4xl font-extrabold">Our Best Sellers</h1>
                 <div className="flex gap-2 flex-wrap mt-3">
                     {
                         categories.map((e) => {
                             return (
-                                <button onClick={() => setbestsellercategory(e)} className={`p-2 pl-4 pr-4 rounded-full border ${bestsellercategory === e ? 'bg-slate-900 text-white' : 'bg-white text-black'} text-xs cursor-pointer transition-all duration-300`}>{e}</button>
+                                <button onClick={() => setbestsellercategory(e)} className={`p-2 pl-4 pr-4 rounded-full border ${bestsellercategory === e ? 'bg-slate-900 text-white' : 'bg-white text-black'} text-xs md:text-md cursor-pointer transition-all duration-300`}>{e}</button>
                             )
                         })
                     }
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 p-2 place-items-center">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 lg:p-3 place-items-center">
                     {
-                        filterbestseller.map((e) => {
+                        filterbestseller.map((e, i) => {
+                            if ((i + 1) > 8) return
                             return (
-                                <div className="w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-3 flex flex-col">
-                                    <div className="w-full h-2/3"><img src={e.productImage} className="w-full h-full object-contain" /></div>
+                                <div className="w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-2 flex flex-col">
+                                    <div className="w-full h-2/3 bg-slate-100"><img src={e.productImage} className="w-full h-full object-contain" /></div>
                                     <div className="p-2">
                                         <h4 className="text-black text-sm line-clamp-2">{e.productInfo}</h4>
                                     </div>
-                                    <div className='mt-auto flex justify-between'>
-                                        <a href={`/overview?productId=${e.productId}`} className="p-2 pl-5 pr-5 bg-slate-900 text-white text-xs rounded-full w-fit">overview</a>
-                                        <h1 className='text-lg font-bold text-slate-800'>₹{e.productPrice}</h1>
+                                    <div className='mt-auto flex justify-between items-center'>
+                                        <h1 className='text-xs md:text-lg font-bold text-slate-800'>₹{e.productPrice}</h1>
+                                        <a href={`/overview?productId=${e.productId}`} className="p-2 pl-3 pr-3 md:pl-5 md:pr-5 bg-slate-900 text-white text-xs rounded-full w-fit">overview</a>
                                     </div>
                                 </div>
                             )
@@ -209,23 +203,23 @@ const Home = () => {
 
                 </div>
             </section>
-            <section className="mt-15 mb-15">
+            <section className="mt-20 mb-20">
                 <div className="mx-auto grid shadow-md grid-cols-1 lg:grid-cols-2 rounded-4xl w-5/6 bg-slate-900">
                     <div className="p-4">
                         <h2 className="bg-slate-950 text-white p-2 pl-5 font-semibold pr-5 rounded-3xl w-fit border border-slate-600">Exclusive Offer</h2>
                         <h1 className="text-6xl text-slate-100 font-extrabold mt-5 mb-1">Get <span className="text-6xl font-extrabold text-slate-500">10% OFF</span></h1>
-                        <p className="text-md p-1 text-slate-200">Enter your email and unlock an exclusive discount on your next purchase.</p>
+                        <p className="text-md p-1 text-slate-300">Enter your email and unlock an exclusive discount on your next purchase.</p>
                         <h2 className="text-slate-400 text-sm mt-5 p-1">✓ One email. One offer. More savings.</h2>
                     </div>
                     <div className="p-3 flex justify-center items-center">
                         <div className="p-4 px-5 rounded-3xl w-full bg-slate-950">
                             <h1 className="font-semibold text-lg mb-4 text-slate-200">Activate your offer</h1>
                             <input placeholder="Enter your email address" className="p-3 border outline-0 border-slate-500 text-white text-sm w-full rounded-2xl" type="text" />
-                            <button className="bg-slate-100 font-semibold p-3 w-full mt-2 rounded-2xl cursor-pointer">Activate Offer ↗</button>
+                            <button className="bg-slate-100 hover:bg-slate-200 transition-all duration-300 font-semibold p-3 w-full mt-2 rounded-2xl cursor-pointer">Activate Offer ↗</button>
                             <p className="text-slate-300 mt-3 text-xs text-center">By activating, you agree to receive offer-related emails.</p>
                         </div>
                     </div>
-                    
+
                 </div>
             </section>
             <Footer />
