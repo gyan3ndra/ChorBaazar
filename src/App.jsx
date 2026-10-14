@@ -6,10 +6,17 @@ import { Bell } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 import promotagimg from './assets/promotag.png'
 import logo from './assets/logo.png'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 
 
 function App() {
+  const location = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
   const [showcart, setshowcart] = useState(false)
   const [cart, setcart] = useState(() => {
     try {
@@ -18,6 +25,7 @@ function App() {
       return []
     }
   })
+
   const cartcount = cart.length
   const [notify, setnotify] = useState(false)
   const [notifiymessage, setnotifymessage] = useState('Checked out!')

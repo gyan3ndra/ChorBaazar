@@ -19,8 +19,12 @@ app.use(cors({
 }))
 app.use(cookieParser())
 app.use(express.json())
-app.use('/admin',admin)
-app.use('/products',products)
+app.use('/admin', admin)
+app.use('/products', products)
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} | ${req.method} ${req.originalUrl}`)
+    next()
+})
 
 try {
     await mongoose.connect(process.env.MONGO_URL)
