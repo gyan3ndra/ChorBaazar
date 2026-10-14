@@ -29,7 +29,8 @@ const schema = mongoose.Schema({
     },
     productAddedCount:{
         type:Number,
-        default:0
+        default:0,
+        min: 0
     },
     uploadedAt: {
         type: Date,

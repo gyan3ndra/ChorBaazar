@@ -11,6 +11,14 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'something went wrong' })
     }
 })
+router.get('/bestseller', async (req, res) => {
+    try {
+        const products =  await productdb.find().sort({ productAddedCount: -1 }).limit(8)
+        res.status(200).json(products)
+    } catch (error) {
+        res.status(500).json({ message: 'something went wrong' })
+    }
+})
 router.get('/overview', async (req, res) => {
     try {
         const { productId } = req.query
@@ -21,9 +29,9 @@ router.get('/overview', async (req, res) => {
         res.status(500).json({ message: 'something went wrong' })
     }
 })
-router.get('/stats/productcount', async (req,res)=>{
+router.get('/stats/productcount', async (req, res) => {
     const count = await productdb.countDocuments()
-    res.status(200).json({productCount:count})
+    res.status(200).json({ productCount: count })
 })
 router.put('/increment', async (req, res) => {
     try {
@@ -50,7 +58,10 @@ router.put('/decrement', async (req, res) => {
     try {
         const { productId } = req.query
         const result = await productdb.updateOne(
-            { productId },
+            {
+                productId,
+                productAddedCount: { $gt: 0 }
+            },
             { $inc: { productAddedCount: -1 } }
         )
 

@@ -75,7 +75,7 @@ const Home = () => {
     useState(() => {
         const fetchproducts = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products`)
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/bestseller`)
                 const data = await res.json()
                 if (res.ok) {
                     setproducts(data)
@@ -145,7 +145,7 @@ const Home = () => {
                             <div className="overflow-hidden w-40 h-43 md:w-50 md:h-46 bg-gray-300 rounded-3xl p-3 flex flex-col">
                                 <h2 className="text-3xl md:text-4xl text-slate-800 font-extrabold">BEST</h2>
                                 <h2 className="text-3xl md:text-4xl text-slate-500 font-extrabold">SELLERS.</h2>
-                                <button onClick={()=>document.getElementById('BEST-SELLER').scrollIntoView({behavior:'smooth'})} className="border-2 mt-auto ml-auto p-1  rounded-full text-slate-800 text-sm pl-3 pr-3 cursor-pointer hover:bg-slate-100 transition-all duration-200">view ↗</button>
+                                <button onClick={()=>document.getElementById('BEST-SELLER').scrollIntoView({behavior:'smooth'})} className="border-2 mt-auto ml-auto p-1  rounded-full text-slate-800 text-sm pl-3 pr-3 cursor-pointer bg-slate-100 hover:bg-slate-500 transition-all duration-200">view ↗</button>
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@ const Home = () => {
                         filterbestseller.map((e, i) => {
                             if ((i + 1) > 8) return
                             return (
-                                <div key={e.productId} className="w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-2 flex flex-col">
+                                <div key={e.productId} className="relative w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-2 flex flex-col">
                                     <div className="w-full h-2/3 bg-slate-100"><img src={e.productImage} className="w-full h-full object-contain" /></div>
                                     <div className="p-2">
                                         <h4 className="text-black text-sm line-clamp-2">{e.productInfo}</h4>
@@ -208,6 +208,7 @@ const Home = () => {
                                         <h1 className='text-xs md:text-lg font-bold text-slate-800'>₹{e.productPrice}</h1>
                                         <a href={`/overview?productId=${e.productId}`} className="p-2 pl-3 pr-3 md:pl-5 md:pr-5 bg-slate-900 text-white text-xs rounded-full w-fit">overview</a>
                                     </div>
+                                    <div className="absolute top-2 left-2 border p-2 pl-3 pr-3 text-xs bg-white backdrop-blur-md rounded-md">Best Seller</div>
                                 </div>
                             )
                         })
