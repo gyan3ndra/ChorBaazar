@@ -58,19 +58,19 @@ const About = () => {
                 </div>
             </section>
             <section className="mt-10 mb-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 p-3 place-items-center gap-5 *:p-3">
+                <div className="grid *:rounded-2xl grid-cols-1 md:grid-cols-2 p-3 place-items-center gap-5 *:p-3">
                     <div>
                         <h4 className="text-sm font-bold text-slate-600">Who We Are</h4>
                         <h1 className="text-2xl font-semibold">More Than Just a Marketplace</h1>
-                        <p className="mt-1 text-sm">Chor Baazar is built for people who love finding great products without spending a fortune. We bring multiple shopping categories together in one place, making it easier to discover products that match your style, needs, and budget.
+                        <p className="mt-1 text-sm text-slate-600">Chor Baazar is built for people who love finding great products without spending a fortune. We bring multiple shopping categories together in one place, making it easier to discover products that match your style, needs, and budget.
 
                             Whether you're looking for everyday essentials, the latest gadgets, or something completely unexpected, we're here to make your shopping experience simple, exciting, and accessible.</p>
                     </div>
                     <div>
                         <h4 className="text-sm font-bold text-slate-600">Our Story</h4>
                         <h1 className="text-2xl font-semibold">A Different Kind of Shopping Experience</h1>
-                        <p className="mt-1 text-sm">Shopping should be exciting, not expensive.</p>
-                        <p className="text-sm">
+                        <p className="mt-1 text-sm text-slate-800">Shopping should be exciting, not expensive.</p>
+                        <p className="text-sm text-slate-600">
 
                             Chor Baazar was created around a simple idea: bring variety, value, and discovery together in one place. Inspired by the thrill of finding something amazing at an unbelievable price, we're building a shopping experience where exploring products is just as enjoyable as buying them.
 

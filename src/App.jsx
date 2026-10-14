@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './components/Home'
+import { Bell } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 import promotagimg from './assets/promotag.png'
 import logo from './assets/logo.png'
@@ -18,6 +19,8 @@ function App() {
     }
   })
   const cartcount = cart.length
+  const [notify, setnotify] = useState(false)
+  const [notifiymessage, setnotifymessage] = useState('Checked out!')
   const removecartitem = async (ID) => {
     setcart(prev => prev.filter(item => item.productId !== ID))
     const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/decrement?productId=${ID}`, {
@@ -27,16 +30,17 @@ function App() {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
   }, [cart])
-  
+
   const subtotal = cart?.reduce((acc, e) => acc + Number(e.productPrice), 0)
-  const discount = 10
+  const discount = 0
   const deliverycharge = 0
+  const checkamount = subtotal + deliverycharge - discount
 
   return (
     <section className='relative'>
       <img className="absolute w-50 h-20 left-2 top-1 object-contain" src={logo} alt="" />
       <Navbar cartcount={cartcount} showcart={showcart} setshowcart={setshowcart} />
-      <Outlet context={[cart,setcart]} />
+      <Outlet context={[cart, setcart]} />
       <section className={`fixed bottom-0 z-30 px-1 sm:px-4 transition-transform duration-300 w-full ${showcart ? 'translate-y-0' : 'translate-y-full'}`}>
         <section className="mx-auto flex h-[92dvh] max-h-[800px] w-full max-w-7xl flex-col overflow-hidden rounded-t-2xl bg-gray-950/80 p-2 shadow-2xl backdrop-blur-md lg:h-[min(80vh,700px)]">
           <header className="mb-2 flex shrink-0 items-center justify-between gap-2 px-2 py-1">
@@ -72,7 +76,7 @@ function App() {
                   <div className="flex items-center justify-between gap-2"><span className="text-gray-600">Discount</span><span className="font-bold text-red-500">- ₹{discount}</span></div>
                   <div className="flex items-center justify-between gap-2"><span className="text-gray-600">Delivery fee</span><span className="font-bold">₹{deliverycharge}</span></div>
                   <div className="h-px w-full bg-slate-300"></div>
-                  <div className="flex items-center justify-between gap-2"><span className="font-semibold">Total</span><span className="font-bold">₹{subtotal + deliverycharge - discount}</span></div>
+                  <div className="flex items-center justify-between gap-2"><span className="font-semibold">Total</span><span className="font-bold">₹{checkamount < 0 ? 0 : checkamount}</span></div>
                 </div>
               </div>
               <div className="mt-2 flex min-w-0 gap-2">
@@ -89,6 +93,13 @@ function App() {
       </section>
 
       {/* <Footer/> */}
+      <div className='notification fixed top-2 p-2 left-2 max-w-35 h-fit bg-slate-900/50 backdrop-blur-md border-2 rounded-md transition-all duration-300 -translate-x-100'>
+        <div className='flex gap-2 items-center justify-center'>
+          <Bell color='red' size={25} />
+          <p className='text-xs text-white'>{notifiymessage}</p>
+        </div>
+        <h1 className='w-full h-1 bg-black rounded-full mt-2'></h1>
+      </div>
     </section>
   )
 }
