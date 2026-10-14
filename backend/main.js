@@ -13,7 +13,7 @@ const app = express()
 app.use(cors({
     origin: [
         'http://localhost:5173',
-        'https://chorbaazar.onrender.com'
+        'https://chor-baazar.vercel.app'
     ],
     credentials: true
 }))
