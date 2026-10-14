@@ -3,6 +3,7 @@ import animatedcart from '../assets/animated_cart.apng'
 import { useOutletContext, useSearchParams } from 'react-router-dom'
 
 const Overview = () => {
+    const [cart, setcart] = useOutletContext()
     const [params] = useSearchParams()
     const [cartcount, setcartcount] = useOutletContext()
     const productId = params.get('productId')
@@ -17,16 +18,24 @@ const Overview = () => {
     }, [])
 
     const handleaddtocart = async () => {
-        const cart = JSON.parse(localStorage.getItem('cart')) || []
+        // const getCart = () => {
+        //     try {
+        //         return JSON.parse(localStorage.getItem('cart') || '[]')
+        //     } catch {
+        //         return []
+        //     }
+        // }
+        // const cart = getCart()
         const alreadyexists = cart.some(e => e.productId === product.productId)
-        if (alreadyexists) { 
+        if (alreadyexists) {
             alert('This item is already in your cart!')
             return
         }
-        cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
-        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/increment?productId=${product.productId}`,{
-            method:'PUT',
+        // cart.push(product)
+        // localStorage.setItem('cart', JSON.stringify(cart))
+        setcart(prev => [...prev, product])
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/increment?productId=${product.productId}`, {
+            method: 'PUT',
         })
         const data = await res.json()
         console.log(data)

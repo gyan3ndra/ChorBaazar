@@ -9,7 +9,7 @@ const Navbar = ({ cartcount, setcartcount,setshowcart,showcart }) => {
     const navigate = useNavigate()
     return (
         <header className="z-40 fixed top-0 p-3 flex justify-end md:justify-center items-center w-full">
-            <nav className='hidden md:flex gap-10 items-center p-2  bg-slate-900 rounded-full w-fit pl-10 pr-10'>
+            <nav className='hidden md:flex gap-10 items-center p-2  bg-slate-900/50 backdrop-blur-2xl border-2 rounded-full w-fit pl-10 pr-10'>
                 <ul className='flex gap-5 md:gap-10 *:cursor-pointer *:hover:text-slate-400 *:transition-all *:duration-300 text-sm text-white'>
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/contact'>Contact</Link></li>
@@ -21,7 +21,7 @@ const Navbar = ({ cartcount, setcartcount,setshowcart,showcart }) => {
                     <h1 className="absolute right-0 bottom-0 text-red-500 font-bold cursor-pointer translate-x-1">{cartcount}</h1>
                 </div>
             </nav>
-            <nav className='md:hidden relative flex gap-5 md:gap-10 items-center p-2  bg-slate-900 rounded-full w-fit pr-4 md:pl-10 md:pr-10'>
+            <nav className='md:hidden relative flex gap-5 md:gap-10 items-center p-2  bg-slate-900/50 backdrop-blur-2xl border-2 border-black rounded-full w-fit pr-4 md:pl-10 md:pr-10'>
                 <button onClick={()=>setshowmenu(!showmenu)} className="w-8 h-8 bg-white rounded-full"></button>
                 <div onClick={() => { setshowcart(!showcart) }} className='relative'>
                     <img className="w-8 h-8 cursor-pointer invert" src={cartimg} alt="" />

@@ -10,27 +10,33 @@ import logo from './assets/logo.png'
 
 function App() {
   const [showcart, setshowcart] = useState(false)
-  const [cart, setcart] = useState(() => JSON.parse(localStorage.getItem('cart') || []))
-
+  const [cart, setcart] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('cart') || '[]')
+    } catch {
+      return []
+    }
+  })
+  const cartcount = cart.length
   const removecartitem = async (ID) => {
     setcart(prev => prev.filter(item => item.productId !== ID))
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/decrement?productId=${ID}`,{
-            method:'PUT',
-        })
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/decrement?productId=${ID}`, {
+      method: 'PUT',
+    })
   }
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
   }, [cart])
-  const [cartcount, setcartcount] = useState(cart.length)
-  const subtotal = cart.reduce((acc, e) => acc + Number(e.productPrice), 0)
+  
+  const subtotal = cart?.reduce((acc, e) => acc + Number(e.productPrice), 0)
   const discount = 10
   const deliverycharge = 0
 
   return (
     <section className='relative'>
-       <img className="absolute w-50 h-20 left-2 top-1 object-contain" src={logo} alt="" />
-      <Navbar cartcount={cartcount} showcart={showcart} setshowcart={setshowcart} setcartcount={setcartcount} />
-      <Outlet context={[cartcount, setcartcount]} />
+      <img className="absolute w-50 h-20 left-2 top-1 object-contain" src={logo} alt="" />
+      <Navbar cartcount={cartcount} showcart={showcart} setshowcart={setshowcart} />
+      <Outlet context={[cart,setcart]} />
       <section className={`fixed bottom-0 z-30 px-1 sm:px-4 transition-transform duration-300 w-full ${showcart ? 'translate-y-0' : 'translate-y-full'}`}>
         <section className="mx-auto flex h-[92dvh] max-h-[800px] w-full max-w-7xl flex-col overflow-hidden rounded-t-2xl bg-gray-950/80 p-2 shadow-2xl backdrop-blur-md lg:h-[min(80vh,700px)]">
           <header className="mb-2 flex shrink-0 items-center justify-between gap-2 px-2 py-1">
@@ -39,11 +45,11 @@ function App() {
           </header>
           <section className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(0,1fr)_auto] gap-2 p-1 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:grid-rows-1">
             <div className="min-h-0 min-w-0 overflow-y-auto overscroll-contain p-2 scrollbar-thin scrollbar-thumb-slate-950">
-              {cart.length === 0 ? (
+              {cart?.length === 0 ? (
                 <div className="flex h-full items-center justify-center text-center text-sm text-white sm:text-base">Your cart is empty.</div>
               ) : (
                 <div className="grid grid-cols-1 gap-2 xl:grid-cols-2">
-                  {cart.map((e) => (
+                  {cart?.map((e) => (
                     <div key={e.productId} className="flex h-28 min-w-0 gap-2 overflow-hidden rounded-xl bg-white p-2 sm:h-32 sm:gap-3">
                       <div className="h-full w-24 shrink-0 overflow-hidden rounded-lg bg-black sm:w-28">
                         <img src={e.productImage} className="h-full w-full object-contain" alt={e.productInfo || 'Cart product'} />

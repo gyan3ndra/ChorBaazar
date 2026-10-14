@@ -53,9 +53,9 @@ const Contact = () => {
         <section className="pt-20">
             <section className="pt-10 mb-10 grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="my-auto flex flex-col p-4">
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900">WE'RE HERE TO HELP</h1>
+                    <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900">WE'RE HERE TO HELP</h1>
                     <h2 className="text-xl md:text-2xl font-extrabold text-slate-600">Let's Start a Conversation.</h2>
-                    <div className="w-30 h-2 rounded-full bg-slate-900"></div>
+                    <div className="h-2 rounded-full bg-slate-900 w-30"></div>
                     <p className="max-w-110 md:-sm mt-3 p-2 text-slate-700">Have a question, need help with an order, or looking for more information? We'd love to hear from you. Reach out to us, and we'll help you find the right solution.</p>
                     <a href='/products' className="p-2 pl-10 pr-10 rounded-full text-white bg-slate-950 cursor-pointer mt-2 w-fit">Shop Now !</a>
                 </div>
@@ -77,7 +77,7 @@ const Contact = () => {
                                 <div key={e.title} className="p-4 flex h-35 flex-col bg-slate-50 rounded-md">
                                     <h2 className="text-lg font-bold text-slate-900">{e.title}</h2>
                                     <p className="text-sm text-slate-600">{e.description}</p>
-                                    <a href={e.link} className="rounded-full mt-auto text-xs cursor-pointer w-fit hover:text-blue-800 transition-all duration-200 flex gap-2 items-center">{e.button} <img className='w-3 h-3' src={externallinkimg}/></a>
+                                    <a target="_blank" rel="noopener noreferrer" href={e.link} className="rounded-full mt-auto text-xs cursor-pointer w-fit hover:text-blue-800 transition-all duration-200 flex gap-2 items-center">{e.button} <img className='w-3 h-3' src={externallinkimg}/></a>
                                 </div>
                             )
                         })

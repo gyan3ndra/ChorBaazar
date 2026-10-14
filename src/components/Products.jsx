@@ -76,7 +76,7 @@ const Products = memo(() => {
                     <select onChange={handleSortChange} name="sort" className='modern-select text-sm md:text-md' id="">
                         <option value="">Sort Items</option>
                         <option value="">none</option>
-                        <option value="latest">latest</option>
+                        {/* <option value="latest">latest</option> */}
                         <option value="pricelow">price : low-high</option>
                         <option value="pricehigh">price : high-low</option>
                     </select>

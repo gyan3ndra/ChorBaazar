@@ -10,6 +10,10 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const navigate = useNavigate()
+    const [stats,setstats] = useState({
+        productCount:0,
+        productCategoryCount:4
+    })
     const [products, setproducts] = useState([])
     const [sliderProducts, setcards] = useState(['bg-blue-300', 'bg-yellow-300', 'bg-red-300'])
     const [bestsellercategory, setbestsellercategory] = useState('All')
@@ -80,6 +84,15 @@ const Home = () => {
                 console.log(error)
             }
         }
+        const getstats = async ()=>{
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products/stats/productcount`)
+            const data = await res.json()
+            console.log(data)
+            if(res.ok){
+                setstats(prev=>({...prev,productCount:data.productCount}))
+            }
+        }
+        getstats()
         fetchproducts()
     }, [])
 
@@ -110,7 +123,7 @@ const Home = () => {
                             <div className="overflow-hidden w-40 h-43 md:w-50 md:h-46 bg-gray-300 rounded-3xl p-3 flex flex-col">
                                 <h2 className="text-lg md:text-2xl font-extrabold text-slate-600">OUR INVENTORY</h2>
                                 <div className="">
-                                    <h1 className="text-center text-2xl text-slate-800 font-extrabold">1,200+</h1>
+                                    <h1 className="text-center text-2xl text-slate-800 font-extrabold">{stats.productCount}+</h1>
                                     <p className="text-xs text-center text-slate-700 font-semibold">Total Products</p>
                                 </div>
                                 <p className="text-sm md:text-lg text-slate-800 font-extrabold mt-auto">More to discover.</p>
@@ -118,7 +131,7 @@ const Home = () => {
                             <div className="overflow-hidden w-40 h-30 md:w-50 md:h-36 bg-gray-900 rounded-3xl p-3 flex flex-col items-center gap-1">
                                 <h2 className="text-lg md:text-2xl font-extrabold text-slate-500">FOR EVERYONE</h2>
                                 <div className="">
-                                    <h1 className="text-center text-2xl text-slate-400 font-extrabold">4+</h1>
+                                    <h1 className="text-center text-2xl text-slate-400 font-extrabold">{stats.productCategoryCount}+</h1>
                                     <p className="text-xs text-center text-slate-300 font-semibold">Product Categories</p>
                                 </div>
                             </div>
@@ -176,7 +189,7 @@ const Home = () => {
                     {
                         categories.map((e) => {
                             return (
-                                <button onClick={() => setbestsellercategory(e)} className={`p-2 pl-4 pr-4 rounded-full border ${bestsellercategory === e ? 'bg-slate-900 text-white' : 'bg-white text-black'} text-xs md:text-md cursor-pointer transition-all duration-300`}>{e}</button>
+                                <button key={e} onClick={() => setbestsellercategory(e)} className={`p-2 pl-4 pr-4 rounded-full border ${bestsellercategory === e ? 'bg-slate-900 text-white' : 'bg-white text-black'} text-xs md:text-md cursor-pointer transition-all duration-300`}>{e}</button>
                             )
                         })
                     }
@@ -186,7 +199,7 @@ const Home = () => {
                         filterbestseller.map((e, i) => {
                             if ((i + 1) > 8) return
                             return (
-                                <div className="w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-2 flex flex-col">
+                                <div key={e.productId} className="w-full lg:max-w-70 h-80 bg-white shadow-md hover:scale-102 transition-all duration-300 p-2 flex flex-col">
                                     <div className="w-full h-2/3 bg-slate-100"><img src={e.productImage} className="w-full h-full object-contain" /></div>
                                     <div className="p-2">
                                         <h4 className="text-black text-sm line-clamp-2">{e.productInfo}</h4>

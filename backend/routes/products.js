@@ -21,6 +21,10 @@ router.get('/overview', async (req, res) => {
         res.status(500).json({ message: 'something went wrong' })
     }
 })
+router.get('/stats/productcount', async (req,res)=>{
+    const count = await productdb.countDocuments()
+    res.status(200).json({productCount:count})
+})
 router.put('/increment', async (req, res) => {
     try {
         const { productId } = req.query
