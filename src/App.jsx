@@ -6,9 +6,19 @@ import { Bell } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
 import promotagimg from './assets/promotag.png'
 import logo from './assets/logo.png'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 
 function App() {
@@ -48,6 +58,7 @@ function App() {
     <section className='relative'>
       <img className="absolute w-50 h-20 left-2 top-1 object-contain" src={logo} alt="" />
       <Navbar cartcount={cartcount} showcart={showcart} setshowcart={setshowcart} />
+      <ScrollToTop />
       <Outlet context={[cart, setcart]} />
       <section className={`fixed bottom-0 z-30 px-1 sm:px-4 transition-transform duration-300 w-full ${showcart ? 'translate-y-0' : 'translate-y-full'}`}>
         <section className="mx-auto flex h-[92dvh] max-h-[800px] w-full max-w-7xl flex-col overflow-hidden rounded-t-2xl bg-gray-950/80 p-2 shadow-2xl backdrop-blur-md lg:h-[min(80vh,700px)]">
