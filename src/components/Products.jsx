@@ -83,10 +83,10 @@ const Products = memo(() => {
                     </select>
                 </div>
                 <div className='flex justify-center items-center rounded-[12px] border border-gray-400 pl-1 pr-4 p-1'>
-                    <button className='p-2 rounded-md'>
+                    <div className='p-2 rounded-md shrink-0'>
                         <img src={searchimg} className='w-6 h-6 cursor-pointer rounded-md' />
-                    </button>
-                    <input onChange={handleSearchChange} placeholder='Search Product' className='text-sm p-2 w-75 sm:w-80 focus:outline-0 ml-2' type="text" />
+                    </div>
+                    <input onChange={handleSearchChange} placeholder='Search Product' className='text-sm p-2 min-w-0 flex-1 w-75 sm:w-80 focus:outline-0 ml-2' type="text" />
                 </div>
             </section>
             <section className='p-2 mb-15'>
