@@ -33,9 +33,16 @@ try {
     console.log(e)
 }
 
-
-app.get('/', (req, res) => {
-    res.send('hello')
+app.get('/health',(req,res)=>{
+    res.status(200).json({
+        status:'ok',
+        message:'CHOR BAAZAR is running',
+        timestamp:new Date().toISOString()
+    })
 })
+
+// app.get('/', (req, res) => {
+//     res.send('')
+// })
 
 app.listen(3000)
