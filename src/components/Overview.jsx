@@ -81,9 +81,9 @@ const Overview = () => {
                     </div>
                 </div>
                 {/* <h5 className="">category : {product[0]?.productCategory} </h5> */}
-                <div className='flex flex-wrap gap-3 justify-center sm:justify-start'>
-                    <button onClick={() => { handleaddtocart() }} className="p-3 pl-7 pr-7 w-fit border mt-10 flex items-center gap-3 hover:scale-101 bg-slate-900 text-white group cursor-pointer transition-all rounded-md duration-300 text-sm sm:text-md">Add To Cart<img className='w-5 h-5 invert' src={animatedcart} /></button>
-                    <button className="p-3 pl-7 pr-7 w-fit border mt-10 flex items-center gap-3 hover:scale-101 bg-slate-100 group cursor-pointer transition-all duration-300 rounded-md text-sm sm:text-md font-semibold">Bargain <img className='w-6 h-6' src={bargainimg} /></button>
+                <div className='flex gap-2 justify-center sm:justify-start'>
+                    <button onClick={() => { handleaddtocart() }} className="p-3 pl-6 pr-6 w-fit border mt-10 flex items-center gap-3 hover:scale-101 bg-slate-900 text-white group cursor-pointer transition-all rounded-md duration-300 text-sm sm:text-md">Add To Cart<img className='w-5 h-5 invert' src={animatedcart} /></button>
+                    <button className="p-3 pl-6 pr-6 w-fit border mt-10 flex items-center gap-3 hover:scale-101 bg-slate-100 group cursor-pointer transition-all duration-300 rounded-md text-sm sm:text-md font-semibold">Bargain <img className='w-6 h-6' src={bargainimg} /></button>
                 </div>
                 <div className='grid grid-cols-3 gap-3 mt-auto'>
                     {

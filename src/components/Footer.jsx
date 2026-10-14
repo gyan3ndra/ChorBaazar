@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom"
+
 const Footer = () => {
+    const navigate = useNavigate()
     return (
         <footer className="h-fit p-5">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 place-content-center">
@@ -9,15 +12,15 @@ const Footer = () => {
                 </div>
                 <ul className=" md:place-self-center font-light text-lg *:mt-3">
                     <h1 className="text-md font-semibold">Shop</h1>
-                    <li className="hover:text-gray-400 cursor-pointer">Best Sellers</li>
-                    <li className="hover:text-gray-400 cursor-pointer">Products</li>
-                    <li className="hover:text-gray-400 cursor-pointer">Categories</li>
+                    <li onClick={()=>document.getElementById('BEST-SELLER').scrollIntoView({behavior:'smooth'})} className="hover:text-gray-400 cursor-pointer">Best Sellers</li>
+                    <li onClick={()=>navigate('/products')} className="hover:text-gray-400 cursor-pointer">Products</li>
+                    <li onClick={()=>document.getElementById('EXPLORE').scrollIntoView({behavior:'smooth'})} className="hover:text-gray-400 cursor-pointer">Categories</li>
                 </ul>
                 <ul className=" md:place-self-center font-light text-lg *:mt-3">
                     <h1 className="text-md font-semibold">Navigator</h1>
-                    <li className="hover:text-gray-400 cursor-pointer">Home</li>
-                    <li className="hover:text-gray-400 cursor-pointer">Contact</li>
-                    <li className="hover:text-gray-400 cursor-pointer">About</li>
+                    <li onClick={()=>navigate('/')} className="hover:text-gray-400 cursor-pointer">Home</li>
+                    <li onClick={()=>navigate('/contact')} className="hover:text-gray-400 cursor-pointer">Contact</li>
+                    <li onClick={()=>navigate('/about')} className="hover:text-gray-400 cursor-pointer">About</li>
                 </ul>
             </div>
             <div className="p-3 font-light text-xs mt-5 rounded-md bg-gray-50 w-fit">

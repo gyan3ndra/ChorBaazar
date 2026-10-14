@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import externallinkimg from '../assets/externallink.png'
 import { useState } from 'react'
+import Footer from './Footer'
 
 const Contact = () => {
     const navigate = useNavigate()
@@ -60,7 +61,7 @@ const Contact = () => {
                     <a href='/products' className="p-2 pl-10 pr-10 rounded-full text-white bg-slate-950 cursor-pointer mt-2 w-fit">Shop Now !</a>
                 </div>
                 <div className='flex justify-center items-center'>
-                    <form onSubmit={sendEmail} id='CONTACT-FORM' className='mx-auto bg-slate-100 shadow-md w-90 p-3 flex flex-col rounded-2xl h-fit gap-2'>
+                    <form onSubmit={sendEmail} id='CONTACT-FORM' className='mx-auto bg-slate-100 shadow-md w-85 sm:w-90 p-3 flex flex-col rounded-2xl h-fit gap-2'>
                         <h1 className='text-lg font-bold mb-3'>Get In Touch</h1>
                         <input name='name' onChange={handleChange} placeholder='name' className='p-3 border border-slate-300 w-full rounded-md outline-0  bg-white text-sm' type="text" />
                         <input name='email' onChange={handleChange} placeholder='email' className='p-3 w-full border border-slate-300 rounded-md outline-0  bg-white text-sm' type="email" />
@@ -69,7 +70,7 @@ const Contact = () => {
                     </form>
                 </div>
             </section>
-            <section className="p-3">
+            <section className="p-3 mb-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                     {
                         contactcards.map((e)=>{
@@ -84,6 +85,7 @@ const Contact = () => {
                     }
                 </div>
             </section>
+            <Footer/>
         </section>
     )
 }

@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react'
 import searchimg from '../assets/search.png'
 import { useSearchParams } from 'react-router-dom'
+import Footer from './Footer'
 
 const Products = memo(() => {
     const [params] = useSearchParams()
@@ -85,10 +86,10 @@ const Products = memo(() => {
                     <button className='p-2 rounded-md'>
                         <img src={searchimg} className='w-6 h-6 cursor-pointer rounded-md' />
                     </button>
-                    <input onChange={handleSearchChange} placeholder='Search Product' className='text-sm p-2 w-80 focus:outline-0 ml-2' type="text" />
+                    <input onChange={handleSearchChange} placeholder='Search Product' className='text-sm p-2 w-75 sm:w-80 focus:outline-0 ml-2' type="text" />
                 </div>
             </section>
-            <section className='p-2'>
+            <section className='p-2 mb-15'>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 p-2 place-items-center">
                     {
                         sortProducts.map((e) => {
@@ -109,6 +110,7 @@ const Products = memo(() => {
 
                 </div>
             </section>
+            <Footer/>
         </section>
     )
 })
